@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, make_response, Response
+from flask import Flask, jsonify, request, make_response, Response, render_template
 from flask_mysqldb import MySQL
 import jwt
 import datetime
@@ -39,15 +39,7 @@ def format_response(data, status_code=200):
 
 @app.route('/')
 def home():
-    return jsonify({
-        'message': 'Welcome to the Library REST API!',
-        'endpoints': {
-            'login': '/login (POST)',
-            'books': '/books (GET, POST)',
-            'book_details': '/books/<id> (GET, PUT, DELETE)'
-        },
-        'note': 'Most endpoints require a token. Get one by logging in.'
-    })
+    return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
 def login():
