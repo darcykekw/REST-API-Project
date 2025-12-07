@@ -31,12 +31,7 @@ This is a CRUD REST API for a Library Management System, built with Flask and My
     pip install -r requirements.txt
     ```
 
-4.  Initialize the database:
-    ```bash
-    python init_db.py
-    ```
-
-5.  Run the application:
+4.  Run the application:
     ```bash
     python app.py
     ```
