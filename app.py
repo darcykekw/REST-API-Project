@@ -37,6 +37,18 @@ def format_response(data, status_code=200):
     else:
         return make_response(jsonify(data), status_code)
 
+@app.route('/')
+def home():
+    return jsonify({
+        'message': 'Welcome to the Library REST API!',
+        'endpoints': {
+            'login': '/login (POST)',
+            'books': '/books (GET, POST)',
+            'book_details': '/books/<id> (GET, PUT, DELETE)'
+        },
+        'note': 'Most endpoints require a token. Get one by logging in.'
+    })
+
 @app.route('/login', methods=['POST'])
 def login():
     auth = request.authorization
