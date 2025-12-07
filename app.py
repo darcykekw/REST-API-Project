@@ -12,7 +12,7 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'library_db'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['SECRET_KEY'] = 'your_secret_key' # Change this in production
+app.config['SECRET_KEY'] = 'b786a8c232db4e56b306feb599cf8a00' # Secret key from example
 
 mysql = MySQL(app)
 
