@@ -47,7 +47,7 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    messageDiv.textContent = 'Login Successful! Token: ' + data.token.substring(0, 20) + '...';
+                    messageDiv.innerHTML = 'Login Successful!<br><br><strong>Token:</strong><br><textarea readonly style="width:100%; height:100px;">' + data.token + '</textarea>';
                     messageDiv.className = 'success';
                     console.log('Token:', data.token);
                     // You could store the token in localStorage here
