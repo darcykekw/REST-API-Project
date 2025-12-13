@@ -41,6 +41,10 @@ def format_response(data, status_code=200):
 def home():
     return render_template('login.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 @app.route('/login', methods=['POST'])
 def login():
     auth = request.authorization
@@ -53,7 +57,7 @@ def login():
     cur.close()
 
     if user and user['password'] == auth.password: # In real app, check hash
-        token = jwt.encode({'user': user['username'], 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'], algorithm="HS256")
+        token = jwt.encode({'user': user['username'], 'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'], algorithm="HS256")
         return jsonify({'token': token})
 
     return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})

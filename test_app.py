@@ -28,7 +28,7 @@ class FlaskTestCase(unittest.TestCase):
         response = self.app.get('/books?token=' + self.token)
         self.assertEqual(response.status_code, 200)
 
-    def test_create_book(self):
+    def create_book_helper(self):
         book = {
             'title': 'Test Book',
             'author': 'Test Author',
@@ -43,9 +43,12 @@ class FlaskTestCase(unittest.TestCase):
         self.assertIn('id', data)
         return data['id']
 
+    def test_create_book(self):
+        self.create_book_helper()
+
     def test_update_book(self):
         # First create a book
-        book_id = self.test_create_book()
+        book_id = self.create_book_helper()
         
         update_data = {
             'title': 'Updated Title'
@@ -57,7 +60,7 @@ class FlaskTestCase(unittest.TestCase):
 
     def test_delete_book(self):
         # First create a book
-        book_id = self.test_create_book()
+        book_id = self.create_book_helper()
         
         response = self.app.delete(f'/books/{book_id}?token=' + self.token)
         self.assertEqual(response.status_code, 200)
