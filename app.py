@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, make_response, Response, render_template
+from flask import Flask, jsonify, request, make_response, Response
 from flask_mysqldb import MySQL
 import jwt
 import datetime
@@ -36,14 +36,6 @@ def format_response(data, status_code=200):
         return Response(xml, status=status_code, mimetype='application/xml')
     else:
         return make_response(jsonify(data), status_code)
-
-@app.route('/')
-def home():
-    return render_template('login.html')
-
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
 
 @app.route('/login', methods=['POST'])
 def login():

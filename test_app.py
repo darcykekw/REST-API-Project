@@ -76,5 +76,33 @@ class FlaskTestCase(unittest.TestCase):
         # Assuming Gatsby is in the db from init_db
         self.assertIn(b'Gatsby', response.data)
 
+    def test_missing_token(self):
+        response = self.app.get('/books')
+        self.assertEqual(response.status_code, 401)
+        self.assertIn(b'Token is missing', response.data)
+
+    def test_invalid_token(self):
+        response = self.app.get('/books?token=invalidtoken123')
+        self.assertEqual(response.status_code, 401)
+        self.assertIn(b'Token is invalid', response.data)
+
+    def test_get_book_not_found(self):
+        response = self.app.get('/books/99999?token=' + self.token)
+        self.assertEqual(response.status_code, 404)
+        self.assertIn(b'Book not found', response.data)
+
+    def test_delete_book_not_found(self):
+        response = self.app.delete('/books/99999?token=' + self.token)
+        self.assertEqual(response.status_code, 404)
+        self.assertIn(b'Book not found', response.data)
+
+    def test_create_book_missing_data(self):
+        book = {'title': 'Incomplete Book'} # Missing author
+        response = self.app.post('/books?token=' + self.token, 
+                                 data=json.dumps(book),
+                                 content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b'Missing data', response.data)
+
 if __name__ == '__main__':
     unittest.main()

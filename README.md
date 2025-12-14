@@ -6,7 +6,6 @@ Built with **Flask** and **MySQL**, the API ensures secure access through **JWT 
 
 ## Features
 
-*   **User-Friendly Dashboard**: A web-based interface to manage books without writing code.
 *   **CRUD Operations**: Create, Read, Update, and Delete books.
 *   **Authentication**: JWT-based authentication.
 *   **Search**: Search books by title or author.
@@ -41,23 +40,9 @@ Built with **Flask** and **MySQL**, the API ensures secure access through **JWT 
 
 ## Usage
 
-### Web Dashboard (Recommended)
-The easiest way to use the application is through the built-in web interface.
+### API Usage
 
-1.  Open your browser and go to `http://127.0.0.1:5000/`.
-2.  Login with the default credentials:
-    *   **Username**: `admin`
-    *   **Password**: `password123`
-3.  You will be redirected to the **Dashboard**, where you can:
-    *   View all books.
-    *   Add new books via a popup form.
-    *   Edit existing book details.
-    *   Delete books.
-    *   Search for books by title or author.
-
-### API Usage (For Developers)
-
-If you prefer to use the API directly (e.g., via Postman or curl), follow the instructions below.
+The application provides a RESTful API. You can interact with it using tools like Postman or curl.
 
 #### Authentication
 
@@ -72,8 +57,7 @@ If you prefer to use the API directly (e.g., via Postman or curl), follow the in
 All endpoints below require the `token` query parameter. You must append the token you received from the login step to the URL.
 
 **Important**: Do not include `<` or `>` characters around your token.
-*   **Correct**: `http://127.0.0.1:5000/books?token=eyJhbGci...`
-*   **Incorrect**: `http://127.0.0.1:5000/books?token=<eyJhbGci...>`
+*   **Example**: `http://127.0.0.1:5000/books?token=eyJhbGci...`
 
 **Get All Books**
 *   **URL**: `/books`
